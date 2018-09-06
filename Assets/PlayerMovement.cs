@@ -31,8 +31,26 @@ public class PlayerMovement : MonoBehaviour {
 
         float x = (targetX - transform.position.x) * .1f;
         transform.position += new Vector3(x, 0, 0);
-
-
-
 	}
+
+    void OnOverlappingAABB(ObjectAABB other)
+    {
+        if(other.tag == "Powerup")
+        {
+            //it must be a powerup...
+            Powerup powerup = other.GetComponent<Powerup>();
+            switch (powerup.type)
+            {
+                case Powerup.Type.None:
+                    break;
+                case Powerup.Type.Slowmo:
+                    break;
+                case Powerup.Type.Health:
+                    break;
+                case Powerup.Type.JetpackBoost:
+                    break;
+            }
+            Destroy(other.gameObject);
+        }
+    }
 }

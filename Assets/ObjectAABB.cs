@@ -4,24 +4,70 @@ using UnityEngine;
 
 public class ObjectAABB : MonoBehaviour {
 
-    float width;
-    float height;
-    float depth;
+    MeshRenderer _mesh;      // private C# field
+
+    public MeshRenderer mesh    // C# property
+    {
+        get
+        {
+            if (!_mesh) _mesh = GetComponent<MeshRenderer>();     // "lazy" initialization
+            return _mesh;
+        }
+    }
+    public Bounds bounds    // C# property
+    {
+        get
+        {
+            return mesh.bounds;
+        }
+    }
+
+    [HideInInspector] public bool isDoneChecking = false;
+    [HideInInspector] public bool isOverlapping = false;
 
 	// Use this for initialization
-	void Start () {     //Pass in the object?
-		//Store GameObject's width (x) under width.
-        //Store GameObject's height (y) under height.
-        //Store GameObject's depth (z) under depth.
+	void Start () {
+        CollisionController.Add(this);
 	}
+    void OnDestroy()
+    {
+        CollisionController.Remove(this);
+    }
 	
 	// Update is called once per frame
-	void checkForCollision () {     //Pass in an AABB for another GameObject to check for collision.   
-        //If this GameObject's x position is in the other GameObject's x position, return true.
-        //If this GameObject's y position is in the other GameObject's y position, return true.
-        //If this GameObject's z position is in the other GameObject's z position, return true.
-        return false;
+	void Update () {
+        isDoneChecking = false;
+        isOverlapping = false;
 	}
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = isOverlapping ? Color.red : Color.white;
+        Gizmos.DrawWireCube(transform.position, mesh.bounds.size);
+    }
+    /// <summary>
+    /// Checks to see if some other AABB overlaps this AABB.
+    /// </summary>
+    /// <param name="other">The other AABB component to check against.</param>
+    /// <returns>If true, the two AABBs overlap.</returns>
+    public bool CheckOverlap(ObjectAABB other)
+    {
+        if (other.bounds.min.x > this.bounds.max.x) return false;
+        if (other.bounds.max.x < this.bounds.min.x) return false;
+
+        if (other.bounds.min.y > this.bounds.max.y) return false;
+        if (other.bounds.max.y < this.bounds.min.y) return false;
+
+        if (other.bounds.min.z > this.bounds.max.z) return false;
+        if (other.bounds.max.z < this.bounds.min.z) return false;
+
+        return true;
+    }
+
+    void OnOverlappingAABB(ObjectAABB other)
+    {
+        isOverlapping = true;
+    }
 
     
 }
