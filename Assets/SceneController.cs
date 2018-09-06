@@ -4,27 +4,44 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour {
 
-    public GameObject prefabWall;
-    const float deadZone_Z = -8;
-    float delayUntilSpawn = 0;
+    public Track[] prefabTracks;
+    List<Track> tracks = new List<Track>();
+    const float trackCount = 5;
 
 	void Start () {
-		
+        SpawnSomeTrack();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-        delayUntilSpawn -= Time.deltaTime;
-        //spawn obstacles
-        if (delayUntilSpawn <= 0)
+        for(int i = tracks.Count - 1; i >= 0; i--)
         {
-            Vector3 pos = new Vector3(0, 0, 20);
-            Instantiate(prefabWall, pos, Quaternion.identity);
-            delayUntilSpawn = Random.Range(1, 3);
+            if(tracks[i].isDead)
+            {
+                Destroy(tracks[i].gameObject);
+                tracks.RemoveAt(i);
+            }
         }
 
-        //check to see if object is off-screen
-        
+        if (tracks.Count < trackCount) SpawnSomeTrack();
 	}
+
+    void SpawnSomeTrack()
+    {
+        while (tracks.Count < trackCount)
+        {
+            Vector3 ptOut = new Vector3(0, .3f, 0); ;
+
+            if (tracks.Count > 0) ptOut = tracks[tracks.Count - 1].pointOut.position;
+
+            Track prefab = prefabTracks[Random.Range(0, prefabTracks.Length)];
+
+            Vector3 ptIn = prefab.pointIn.position;
+
+            Vector3 pos = (prefab.transform.position - ptIn) + ptOut;
+
+            Track newTrack = Instantiate(prefab, pos, Quaternion.identity);
+            tracks.Add(newTrack);
+        }
+    }
 }
