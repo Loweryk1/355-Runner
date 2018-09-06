@@ -5,6 +5,7 @@ using UnityEngine;
 public class SceneController : MonoBehaviour {
 
     public GameObject prefabWall;
+    const float deadZone_Z = -8;
     float delayUntilSpawn = 0;
 
 	void Start () {

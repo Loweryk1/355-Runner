@@ -16,14 +16,9 @@ public class ObstacleMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position += new Vector3(0, 0, speed) * Time.deltaTime;
-        if(transform.position.z < deadZone)
+        if (transform.position.z < deadZone)
         {
             isDead = true;
-        }
-
-        if (isDead)
-        {
-            Dispose(); 
         }
 	}
 

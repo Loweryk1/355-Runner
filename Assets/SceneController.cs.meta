@@ -4,8 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - prefabWall: {fileID: 1002954541978992, guid: a5c0922f817251c4ba75d2b60ad9e2b0,
-      type: 2}
+  - prefabWall: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
