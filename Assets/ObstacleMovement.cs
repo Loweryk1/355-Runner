@@ -5,6 +5,8 @@ using UnityEngine;
 public class ObstacleMovement : MonoBehaviour {
 
     const float speed = -10;
+    const float deadZone = -8;
+    bool isDead = false;
 
 	// Use this for initialization
 	void Start () {
@@ -14,5 +16,20 @@ public class ObstacleMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position += new Vector3(0, 0, speed) * Time.deltaTime;
+        if(transform.position.z < deadZone)
+        {
+            isDead = true;
+        }
+
+        if (isDead)
+        {
+            Dispose(); 
+        }
 	}
+
+    // Dispose is called when you're ready to kill the object.
+    void Dispose()
+    {
+        
+    }
 }
