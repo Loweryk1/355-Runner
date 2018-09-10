@@ -3,7 +3,10 @@ guid: ff5ba162131bccf4c944ebce221c3e42
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pointIn: {instanceID: 0}
+  - pointOut: {instanceID: 0}
+  - prefabWall: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

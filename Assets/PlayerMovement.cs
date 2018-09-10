@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour {
     public float laneWidth = 2;
     int lane = 0;
 
+    int playerHealth = 3;
+
 	void Start () {
 		
 	}
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
 
         float x = (targetX - transform.position.x) * .1f;
         transform.position += new Vector3(x, 0, 0);
+        
 	}
 
     void OnOverlappingAABB(ObjectAABB other)
@@ -46,8 +49,14 @@ public class PlayerMovement : MonoBehaviour {
                 case Powerup.Type.Slowmo:
                     break;
                 case Powerup.Type.Health:
+                    playerHealth++;
+                    print("Player's Health is at: " + playerHealth);
                     break;
                 case Powerup.Type.JetpackBoost:
+                    break;
+                case Powerup.Type.Wall:
+                    playerHealth--;
+                    print("Player's Health is at: " + playerHealth);
                     break;
             }
             Destroy(other.gameObject);

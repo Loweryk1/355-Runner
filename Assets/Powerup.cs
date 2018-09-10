@@ -9,7 +9,8 @@ public class Powerup : MonoBehaviour {
         None,
         Slowmo,
         Health,
-        JetpackBoost
+        JetpackBoost,
+        Wall
     }
 
     public Type type;
