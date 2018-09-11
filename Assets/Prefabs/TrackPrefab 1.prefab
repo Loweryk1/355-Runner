@@ -293,4 +293,6 @@ MonoBehaviour:
   prefabWall: {fileID: 1002954541978992, guid: a5c0922f817251c4ba75d2b60ad9e2b0, type: 2}
   prefabHealth: {fileID: 1522285390008040, guid: f5c2c94bfc43762499987183c9c9a555,
     type: 2}
+  prefabWallSmall: {fileID: 1040011455157642, guid: fb4139f936b038f48b5ffde9d3a134fe,
+    type: 2}
   isDead: 0
