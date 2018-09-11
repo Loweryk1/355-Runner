@@ -288,7 +288,7 @@ MonoBehaviour:
   - {fileID: 4850260021126440}
   - {fileID: 4031486853339402}
   - {fileID: 4082497152365694}
-  spawnMin: 2
+  spawnMin: 1
   spawnMax: 2
   prefabWall: {fileID: 1002954541978992, guid: a5c0922f817251c4ba75d2b60ad9e2b0, type: 2}
   prefabHealth: {fileID: 1522285390008040, guid: f5c2c94bfc43762499987183c9c9a555,

@@ -7,10 +7,11 @@ public class PlayerMovement : MonoBehaviour {
     public float laneWidth = 2;
     int lane = 0;
 
-    int playerHealth = 3;
+    public int playerHealthMax = 3;
+    int playerHealth;
 
-	void Start () {
-		
+    void Start () {
+        playerHealth = playerHealthMax;
 	}
 	
 	// Update is called once per frame
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
                     break;
                 case Powerup.Type.Health:
                     playerHealth++;
+                    if (playerHealth > playerHealthMax) playerHealth = playerHealthMax;
                     print("Player's Health is at: " + playerHealth);
                     break;
                 case Powerup.Type.JetpackBoost:

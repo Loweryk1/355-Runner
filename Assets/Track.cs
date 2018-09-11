@@ -16,51 +16,82 @@ public class Track : MonoBehaviour {
 
     public GameObject prefabWall;
     public GameObject prefabHealth;
+
+    List<GameObject> prefabObjects = new List<GameObject>();
+    
     const float speed = 10;
 
     [HideInInspector] public bool isDead = false;
 
     void Start()
     {
+        // check to make sure all spawn points and game objects have been set.
         if (prefabSpawnPoints.Length == 0) return;
         if (!prefabWall) return;
         if (!prefabHealth) return;
-        spawnNumber = Random.Range(spawnMin, spawnMax);
-        print(spawnNumber);
+
+        //Add the prefabs to prefObjects.
+        prefabObjects.Add(prefabWall);
+        prefabObjects.Add(prefabHealth);
+        //for (int k = prefabObjects.Count - 1; k >= 0; k--) print(prefabObjects[k]);
+
+        // Sets the number of prefabs to spawn on this Track.
+        spawnNumber = (Random.Range(0, spawnMax)) + spawnMin;
+        
         for (int i = 0; i < spawnNumber; i++) {
-            // Get a random position:
+            // Get a random position and store it as spawnPos:
             int randIndexPrefab = Random.Range(0, prefabSpawnPoints.Length);
             Vector3 spawnPos = prefabSpawnPoints[randIndexPrefab].position;
 
+            
+            //Used to check if current spawnPos has been used on this track before, by comparing it to stored positions within spawnPointsUsed.
             for(int j = spawnPointsUsed.Count-1; j >= 0; j--)
             {
+                // if spawnPos has already been used to spawn an object...
                 if(spawnPos == spawnPointsUsed[j])
                 {
-                    switch(randIndexPrefab)
+                    // ...change spawnPos to a new valid spawn position.
+                    int thisOrThat = Random.Range(0, 1);
+                    switch (randIndexPrefab)
                     {
                         case 0:
-                            spawnPos = prefabSpawnPoints[randIndexPrefab + 1].position;
+                            if (thisOrThat == 0)
+                            { //spawn center
+                                spawnPos = prefabSpawnPoints[randIndexPrefab + 1].position;
+                            } else
+                            { //spawn right
+                                spawnPos = prefabSpawnPoints[randIndexPrefab + 2].position;
+                            }
                             break;
                         case 1:
-                            int thisOrThat = Random.Range(0, 1);
                             if(thisOrThat == 0)
-                            {
+                            { //spawn left
                                 spawnPos = prefabSpawnPoints[0].position;
                             } else
-                            {
+                            { //spawn right
                                 spawnPos = prefabSpawnPoints[prefabSpawnPoints.Length - 1].position;
                             }
                             break;
                         case 2:
-                            spawnPos = prefabSpawnPoints[randIndexPrefab - 1].position;
+                            if (thisOrThat == 0)
+                            { //spawn center
+                                spawnPos = prefabSpawnPoints[randIndexPrefab - 1].position;
+                            } else
+                            { //spawn left
+                                spawnPos = prefabSpawnPoints[randIndexPrefab - 2].position;
+                            }
                             break;
                     }
                 }
             }
+            //Add the current spawnPos to spawnPointsUsed.
             spawnPointsUsed.Add(spawnPos);
 
+            int indexOfObject = Random.Range(0, prefabObjects.Count);
+            GameObject spawnAObject = prefabObjects[indexOfObject];
+
             // Spawn a wall, parent it to this chunk of track:
-            Instantiate(prefabWall, spawnPos, Quaternion.identity, transform);
+            Instantiate(spawnAObject, spawnPos, Quaternion.identity, transform);
         }
     }
 
