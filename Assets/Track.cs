@@ -16,6 +16,7 @@ public class Track : MonoBehaviour {
 
     public GameObject prefabWall;
     public GameObject prefabHealth;
+    public GameObject prefabWallSmall;
 
     List<GameObject> prefabObjects = new List<GameObject>();
     
@@ -29,10 +30,12 @@ public class Track : MonoBehaviour {
         if (prefabSpawnPoints.Length == 0) return;
         if (!prefabWall) return;
         if (!prefabHealth) return;
+        if (!prefabWallSmall) return;
 
         //Add the prefabs to prefObjects.
         prefabObjects.Add(prefabWall);
         prefabObjects.Add(prefabHealth);
+        prefabObjects.Add(prefabWallSmall);
         //for (int k = prefabObjects.Count - 1; k >= 0; k--) print(prefabObjects[k]);
 
         // Sets the number of prefabs to spawn on this Track.
@@ -88,6 +91,7 @@ public class Track : MonoBehaviour {
             spawnPointsUsed.Add(spawnPos);
 
             int indexOfObject = Random.Range(0, prefabObjects.Count);
+            print(indexOfObject);
             GameObject spawnAObject = prefabObjects[indexOfObject];
 
             // Spawn a wall, parent it to this chunk of track:
