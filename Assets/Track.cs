@@ -91,7 +91,6 @@ public class Track : MonoBehaviour {
             spawnPointsUsed.Add(spawnPos);
 
             int indexOfObject = Random.Range(0, prefabObjects.Count);
-            print(indexOfObject);
             GameObject spawnAObject = prefabObjects[indexOfObject];
 
             // Spawn a wall, parent it to this chunk of track:
