@@ -10,6 +10,12 @@ public class PlayerMovement : MonoBehaviour {
     public int playerHealthMax = 3;
     int playerHealth;
 
+    bool isGrounded = true;
+
+    float playerHeight = 0;
+    public int jumpHeight = 2;
+    public int gravity = -2;
+
     void Start () {
         playerHealth = playerHealthMax;
 	}
@@ -30,12 +36,34 @@ public class PlayerMovement : MonoBehaviour {
             lane = Mathf.Clamp(lane, -1, 1);
         }
 
-        float targetX = lane * laneWidth;
-
-        float x = (targetX - transform.position.x) * .1f;
-        transform.position += new Vector3(x, 0, 0);
         
-	}
+
+        float v = Input.GetAxisRaw("Vertical");
+        if (Input.GetButtonDown("Vertical"))
+        {
+            if(v == 1) //if pressing up
+            {
+                if(isGrounded != false)
+                {
+                    playerHeight += jumpHeight;
+                    //transform.position += new Vector3(0, .1f, 0);
+                    isGrounded = false;
+                }
+            }   
+        }
+
+        float targetX = lane * laneWidth;
+        float x = (targetX - transform.position.x) * .1f;
+
+        float y = (playerHeight - transform.position.y) * .1f;
+
+        transform.position += new Vector3(x, y, 0);
+
+        if (!isGrounded)
+        {
+            playerHeight -= gravity *.1f;
+        }
+    }
 
     void OnOverlappingAABB(ObjectAABB other)
     {
@@ -62,6 +90,12 @@ public class PlayerMovement : MonoBehaviour {
                     break;
             }
             Destroy(other.gameObject);
+        }
+        if(other.tag == "Ground")
+        {
+            //it must be the ground...
+            isGrounded = true;
+            playerHeight = 0;
         }
     }
 }

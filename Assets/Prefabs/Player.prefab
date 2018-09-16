@@ -110,3 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 2
+  playerHealthMax: 3
+  jumpHeight: 4
+  gravity: 4
