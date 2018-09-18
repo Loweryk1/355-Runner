@@ -14,6 +14,11 @@ public class MainMenuController : MonoBehaviour {
     {
         print("OPTIONS");
     }
+    public void MainMenuButtonPressed()
+    {
+        print("MENU");
+        SceneManager.LoadScene("MainMenuScene");
+    }
     public void QuitButtonPressed()
     {
         print("QUIT");

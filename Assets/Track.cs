@@ -20,7 +20,7 @@ public class Track : MonoBehaviour {
 
     List<GameObject> prefabObjects = new List<GameObject>();
     
-    const float speed = 10;
+    public float speed = 10;
 
     [HideInInspector] public bool isDead = false;
 

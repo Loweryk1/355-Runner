@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour {
                 if(isGrounded != false)
                 {
                     playerHeight += jumpHeight;
-                    //transform.position += new Vector3(0, .1f, 0);
                     isGrounded = false;
                 }
             }   
@@ -76,6 +75,7 @@ public class PlayerMovement : MonoBehaviour {
                 case Powerup.Type.None:
                     break;
                 case Powerup.Type.Slowmo:
+
                     break;
                 case Powerup.Type.Health:
                     playerHealth++;
