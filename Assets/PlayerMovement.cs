@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour {
                 case Powerup.Type.Wall:
                     playerHealth--;
                     print("Player's Health is at: " + playerHealth);
+                    if (playerHealth <= 0) sceneController.BroadcastMessage("PlayerDead");
                     break;
             }
             Destroy(other.gameObject);
