@@ -27,6 +27,7 @@ public class SceneController : MonoBehaviour {
             {
                 Destroy(tracks[i].gameObject);
                 tracks.RemoveAt(i);
+                score += 1;
             }
         }
 
