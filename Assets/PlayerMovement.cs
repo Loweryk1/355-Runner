@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+    public GameObject sceneController;
+
     public float laneWidth = 2;
     int lane = 0;
 
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     public int gravity = -2;
 
     void Start () {
+        if (!sceneController) return;
         playerHealth = playerHealthMax;
 	}
 	
@@ -75,7 +78,8 @@ public class PlayerMovement : MonoBehaviour {
                 case Powerup.Type.None:
                     break;
                 case Powerup.Type.Slowmo:
-
+                    //set timer in SceneController to start counting down slowmo time.
+                    sceneController.BroadcastMessage("SetSlowmoTimer");
                     break;
                 case Powerup.Type.Health:
                     playerHealth++;

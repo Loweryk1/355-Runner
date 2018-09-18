@@ -774,6 +774,11 @@ Prefab:
       propertyPath: gravity
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114973934129701970, guid: b78f50dfd2df31c48811e9d15fb318da,
+        type: 2}
+      propertyPath: sceneController
+      value: 
+      objectReference: {fileID: 512977580}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78f50dfd2df31c48811e9d15fb318da, type: 2}
   m_IsPrefabAsset: 0

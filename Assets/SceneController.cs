@@ -9,6 +9,12 @@ public class SceneController : MonoBehaviour {
     List<Track> tracks = new List<Track>();
     const float trackCount = 5;
 
+    public const float trackSpeedMax = 10;
+    public const float trackSpeedMin = 5;
+
+    float slowmoTimer = 0;
+    public float slowmoTimeMax = 3;
+
 	void Start () {
         SpawnSomeTrack();
 	}
@@ -25,6 +31,20 @@ public class SceneController : MonoBehaviour {
         }
 
         if (tracks.Count < trackCount) SpawnSomeTrack();
+
+        //if slowMoTimer is > 0,.
+        if (slowmoTimer > 0)
+        {
+            //set Track speed to trackSpeedMin
+            SetTrackSpeed(trackSpeedMin);
+            slowmoTimer -= Time.deltaTime;
+        }
+        else  //else,
+        {
+            //set Track speed to trackSpeedMax
+            SetTrackSpeed(trackSpeedMax);
+        }
+        
 	}
 
     void SpawnSomeTrack()
@@ -43,6 +63,20 @@ public class SceneController : MonoBehaviour {
 
             Track newTrack = Instantiate(prefab, pos, Quaternion.identity);
             tracks.Add(newTrack);
+        }
+    }
+    
+    void SetSlowmoTimer()
+    {
+        slowmoTimer = slowmoTimeMax;
+    }
+
+    //create a function that updates the speed of every tack object every frame.
+    void SetTrackSpeed(float trackSpeed)
+    {
+        for(int j = tracks.Count - 1; j >= 0; j--)
+        {
+            tracks[j].speed = trackSpeed;
         }
     }
 }

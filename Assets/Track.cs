@@ -17,10 +17,11 @@ public class Track : MonoBehaviour {
     public GameObject prefabWall;
     public GameObject prefabHealth;
     public GameObject prefabWallSmall;
+    public GameObject prefabSlowmo;
 
     List<GameObject> prefabObjects = new List<GameObject>();
     
-    public float speed = 10;
+    public float speed;
 
     [HideInInspector] public bool isDead = false;
 
@@ -31,11 +32,13 @@ public class Track : MonoBehaviour {
         if (!prefabWall) return;
         if (!prefabHealth) return;
         if (!prefabWallSmall) return;
+        if (!prefabSlowmo) return;
 
         //Add the prefabs to prefObjects.
         prefabObjects.Add(prefabWall);
         prefabObjects.Add(prefabHealth);
         prefabObjects.Add(prefabWallSmall);
+        prefabObjects.Add(prefabSlowmo);
         //for (int k = prefabObjects.Count - 1; k >= 0; k--) print(prefabObjects[k]);
 
         // Sets the number of prefabs to spawn on this Track.
