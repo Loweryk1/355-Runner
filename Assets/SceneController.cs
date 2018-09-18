@@ -17,10 +17,10 @@ public class SceneController : MonoBehaviour {
     public const float trackSpeedJetpack = 15;
 
     float slowmoTimer = 0;
-    public float slowmoTimeMax = 3f;
+    public float slowmoTimeMax = 2.5f;
 
     float jetpackTimer = 0;
-    public float jetpackTimeMax = 3f;
+    public float jetpackTimeMax = 2.5f;
 
 	void Start () {
         if (!player) return;
