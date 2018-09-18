@@ -285,6 +285,8 @@ MonoBehaviour:
     type: 2}
   prefabSlowmo: {fileID: 1665262105507238, guid: 8c6fff85c8e70fd4585182c180e6e63a,
     type: 2}
+  prefabJetpack: {fileID: 1171937056427738, guid: aeafc9c61de86c8459bbfa9d1cdaef42,
+    type: 2}
   speed: 10
   isDead: 0
 --- !u!114 &114958670561151452

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     int playerHealth;
 
     bool isGrounded = true;
+    bool hasJetpack = false;
 
     float playerHeight = 0;
     public int jumpHeight = 2;
@@ -61,10 +62,15 @@ public class PlayerMovement : MonoBehaviour {
 
         transform.position += new Vector3(x, y, 0);
 
-        if (!isGrounded)
+        if (!isGrounded && !hasJetpack)
         {
             playerHeight -= gravity *.1f;
         }
+    }
+
+    void JetpackDepleted()
+    {
+        hasJetpack = false;
     }
 
     void OnOverlappingAABB(ObjectAABB other)
@@ -87,6 +93,10 @@ public class PlayerMovement : MonoBehaviour {
                     print("Player's Health is at: " + playerHealth);
                     break;
                 case Powerup.Type.JetpackBoost:
+                    playerHeight = jumpHeight * 1.2f;
+                    hasJetpack = true;
+                    isGrounded = false;
+                    sceneController.BroadcastMessage("PlayerHasJetpack");
                     break;
                 case Powerup.Type.Wall:
                     playerHealth--;

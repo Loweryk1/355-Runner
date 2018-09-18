@@ -438,9 +438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816c8efb57164684792dfea39751ff33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 583401788}
   prefabTracks:
   - {fileID: 114242530069336494, guid: f7a1cdbc764203643b46ac7721847907, type: 2}
   score: 0
+  slowmoTimeMax: 3
+  jetpackTimeMax: 3
 --- !u!114 &512977585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +501,11 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &583401788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1104448404572696, guid: b78f50dfd2df31c48811e9d15fb318da,
+    type: 2}
+  m_PrefabInternal: {fileID: 1284697696}
 --- !u!1 &820894546
 GameObject:
   m_ObjectHideFlags: 0

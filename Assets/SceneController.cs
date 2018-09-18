@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
 
+    public GameObject player;
+
     public Track[] prefabTracks;
     public int score = 0;
     List<Track> tracks = new List<Track>();
@@ -12,11 +14,16 @@ public class SceneController : MonoBehaviour {
 
     public const float trackSpeedMax = 10;
     public const float trackSpeedMin = 5;
+    public const float trackSpeedJetpack = 15;
 
     float slowmoTimer = 0;
-    public float slowmoTimeMax = 3;
+    public float slowmoTimeMax = 3f;
+
+    float jetpackTimer = 0;
+    public float jetpackTimeMax = 3f;
 
 	void Start () {
+        if (!player) return;
         SpawnSomeTrack();
 	}
 	
@@ -34,17 +41,23 @@ public class SceneController : MonoBehaviour {
 
         if (tracks.Count < trackCount) SpawnSomeTrack();
 
-        //if slowMoTimer is > 0,.
+        //if slowMoTimer is > 0,
         if (slowmoTimer > 0)
         {
             //set Track speed to trackSpeedMin
             SetTrackSpeed(trackSpeedMin);
             slowmoTimer -= Time.deltaTime;
         }
-        else  //else,
+        if (jetpackTimer > 0)
+        {
+            SetTrackSpeed(trackSpeedJetpack);
+            jetpackTimer -= Time.deltaTime;
+        }
+        if (slowmoTimer <= 0 && jetpackTimer <= 0)
         {
             //set Track speed to trackSpeedMax
             SetTrackSpeed(trackSpeedMax);
+            player.BroadcastMessage("JetpackDepleted");
         }
         
 	}
@@ -71,6 +84,11 @@ public class SceneController : MonoBehaviour {
     void SetSlowmoTimer()
     {
         slowmoTimer = slowmoTimeMax;
+    }
+
+    void PlayerHasJetpack()
+    {
+        jetpackTimer = jetpackTimeMax;
     }
 
     //create a function that updates the speed of every tack object every frame.
