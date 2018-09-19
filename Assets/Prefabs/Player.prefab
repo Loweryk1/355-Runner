@@ -109,7 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650290617bd40ce4288e0e682c0e7b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneController: {fileID: 0}
   laneWidth: 2
-  playerHealthMax: 3
+  playerHealthMax: 6
   jumpHeight: 4
   gravity: 4

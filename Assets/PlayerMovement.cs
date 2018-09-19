@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public GameObject sceneController;
+    public GameObject healthBar;
 
     public float laneWidth = 2;
     int lane = 0;
@@ -21,7 +22,9 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start () {
         if (!sceneController) return;
+        if (!healthBar) return;
         playerHealth = playerHealthMax;
+        healthBar.BroadcastMessage("SetMaxHealth", playerHealthMax);
 	}
 	
 	// Update is called once per frame
@@ -100,7 +103,7 @@ public class PlayerMovement : MonoBehaviour {
                     break;
                 case Powerup.Type.Wall:
                     playerHealth--;
-                    print("Player's Health is at: " + playerHealth);
+                    healthBar.BroadcastMessage("SetHealth", playerHealth);
                     if (playerHealth <= 0) sceneController.BroadcastMessage("PlayerDead");
                     break;
             }
