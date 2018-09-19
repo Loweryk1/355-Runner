@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour {
                 case Powerup.Type.Health:
                     playerHealth++;
                     if (playerHealth >= playerHealthMax) playerHealth = playerHealthMax;
-                    print("Player's Health is at: " + playerHealth);
+                    healthBar.BroadcastMessage("SetHealth", playerHealth);
                     break;
                 case Powerup.Type.JetpackBoost:
                     playerHeight = jumpHeight * 1.2f;
