@@ -359,7 +359,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.813
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &1058288356
@@ -472,6 +472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1186467434}
+  - component: {fileID: 1186467435}
   m_Layer: 5
   m_Name: healthBar
   m_TagString: Untagged
@@ -500,6 +501,21 @@ RectTransform:
   m_AnchoredPosition: {x: 297.9, y: -23.7}
   m_SizeDelta: {x: 571.4, y: 28.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1186467435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186467433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0eebd7b8d5a454caa94600cc91b402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImgHealthBar: {fileID: 1058288355}
+  TxtHealth: {fileID: 1412207504}
+  Min: 0
+  Max: 6
 --- !u!1 &1203286240
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +709,11 @@ Prefab:
       propertyPath: sceneController
       value: 
       objectReference: {fileID: 512977580}
+    - target: {fileID: 114973934129701970, guid: b78f50dfd2df31c48811e9d15fb318da,
+        type: 2}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1186467433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78f50dfd2df31c48811e9d15fb318da, type: 2}
   m_IsPrefabAsset: 0
@@ -820,7 +841,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
