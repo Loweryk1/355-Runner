@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public GameObject sceneController;
     public GameObject healthBar;
+    ParticleSystem jetpackExhaust;
 
     public float laneWidth = 2;
     int lane = 0;
@@ -23,8 +24,11 @@ public class PlayerMovement : MonoBehaviour {
     void Start () {
         if (!sceneController) return;
         if (!healthBar) return;
+        jetpackExhaust = GetComponent<ParticleSystem>();
+        jetpackExhaust.Stop();
         playerHealth = playerHealthMax;
         healthBar.BroadcastMessage("SetMaxHealth", playerHealthMax);
+
 	}
 	
 	// Update is called once per frame
@@ -74,6 +78,7 @@ public class PlayerMovement : MonoBehaviour {
     void JetpackDepleted()
     {
         hasJetpack = false;
+        jetpackExhaust.Stop();
     }
 
     void OnOverlappingAABB(ObjectAABB other)
@@ -98,6 +103,7 @@ public class PlayerMovement : MonoBehaviour {
                 case Powerup.Type.JetpackBoost:
                     playerHeight = jumpHeight * 1.2f;
                     hasJetpack = true;
+                    jetpackExhaust.Play();
                     isGrounded = false;
                     sceneController.BroadcastMessage("PlayerHasJetpack");
                     break;
